@@ -12,6 +12,10 @@ task main()
 	{
 		if(vexRT[Btn6U]==1)
 		{
+
+			motor[clawMotor] = -64;
+			wait1Msec(1000);
+
 			//vexRT[Btn6U]==0;
 			//wait1Msec(2000);
 			SensorValue[rightEncoder] = 0;
@@ -56,10 +60,37 @@ task main()
 			}
 		    motor[rightMotor] = 0;
 				motor[leftMotor] = 0;
-				break;
 
+			SensorValue[rightEncoder] = 0;
+			SensorValue[leftEncoder] = 0;
+
+			while(SensorValue(rightEncoder) < 250)
+			{
+				motor[rightMotor] = 0;
+				motor[leftMotor] = 127;
 			}
-	}
 
+
+
+			motor[clawMotor] = 64;
+			wait1Msec(700);
+
+		{
+				while(SensorValue(rightEncoder) < -250)
+			{
+				motor[rightMotor] = 0;
+				motor[leftMotor] = -127;
+			}
+
+
+}
+
+
+
+		break;
+
+	} // end of if
+
+	} // end of while
 
 }
